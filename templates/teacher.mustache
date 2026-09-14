@@ -1,0 +1,56 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_requesthelp/teacher
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+<div class="requesthelp-dashboard" data-region="requesthelp-dashboard">
+    <div class="requesthelp-summary" aria-label="{{#str}}queue, mod_requesthelp{{/str}}">
+        <div class="requesthelp-summary-card open"><strong data-stat="open">{{open}}</strong><span>{{#str}}totalopen, mod_requesthelp{{/str}}</span></div>
+        <div class="requesthelp-summary-card answered"><strong data-stat="answered">{{answered}}</strong><span>{{#str}}totalanswered, mod_requesthelp{{/str}}</span></div>
+        <div class="requesthelp-summary-card resolved"><strong data-stat="resolved">{{resolved}}</strong><span>{{#str}}totalresolved, mod_requesthelp{{/str}}</span></div>
+    </div>
+
+    <form method="get" class="requesthelp-filters mb-3">
+        <input type="hidden" name="id" value="{{cmid}}">
+        <div>
+            <label for="requesthelp-status">{{#str}}status, mod_requesthelp{{/str}}</label>
+            <select id="requesthelp-status" name="status" class="form-select">
+                <option value="-1" {{#statusall}}selected{{/statusall}}>{{#str}}allstatuses, mod_requesthelp{{/str}}</option>
+                <option value="0" {{#statusopen}}selected{{/statusopen}}>{{#str}}statusopen, mod_requesthelp{{/str}}</option>
+                <option value="1" {{#statusanswered}}selected{{/statusanswered}}>{{#str}}statusanswered, mod_requesthelp{{/str}}</option>
+                <option value="2" {{#statusresolved}}selected{{/statusresolved}}>{{#str}}statusresolved, mod_requesthelp{{/str}}</option>
+            </select>
+        </div>
+        <div>
+            <label for="requesthelp-subject">{{#str}}subject, mod_requesthelp{{/str}}</label>
+            <select id="requesthelp-subject" name="subject" class="form-select">
+                {{#subjects}}<option value="{{value}}" {{#selected}}selected{{/selected}}>{{label}}</option>{{/subjects}}
+            </select>
+        </div>
+        <div class="requesthelp-filter-action"><button class="btn btn-secondary" type="submit">{{#str}}filter, mod_requesthelp{{/str}}</button></div>
+    </form>
+
+    <div class="small text-muted mb-2">{{#str}}autorefresh, mod_requesthelp{{/str}}</div>
+    <div data-region="queue">
+        {{> mod_requesthelp/queue_rows}}
+    </div>
+</div>

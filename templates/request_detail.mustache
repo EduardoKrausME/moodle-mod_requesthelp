@@ -1,0 +1,61 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_requesthelp/request_detail
+
+    Example context (json):
+    {
+        Aqui tem que criar o context em inglês
+    }
+}}
+<div class="requesthelp-detail">
+    <div class="requesthelp-detail-header">
+        <div>
+            <a href="{{backurl}}">&larr; {{#str}}queue, mod_requesthelp{{/str}}</a>
+            <h2 class="mt-2">{{subject}}</h2>
+            <div class="requesthelp-meta">{{student}} · {{created}}</div>
+        </div>
+        <span class="requesthelp-status {{statusclass}}">{{status}}</span>
+    </div>
+
+    <div class="requesthelp-detail-body">
+        <div class="requesthelp-question">{{{description}}}</div>
+        <div class="requesthelp-detail-facts">
+            <div><strong>{{#str}}responsetime, mod_requesthelp{{/str}}</strong><span>{{responsetime}}</span></div>
+            {{#assigned}}<div><strong>{{#str}}assignedto, mod_requesthelp{{/str}}</strong><span>{{assigned}}</span></div>{{/assigned}}
+        </div>
+    </div>
+
+    <div class="requesthelp-actions mb-4">
+        {{#canclaim}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="claim"><button class="btn btn-outline-secondary" type="submit">{{#str}}claim, mod_requesthelp{{/str}}</button></form>{{/canclaim}}
+        {{#canmarkanswered}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="answered"><button class="btn btn-primary" type="submit">{{#str}}markanswered, mod_requesthelp{{/str}}</button></form>{{/canmarkanswered}}
+        {{#canresolve}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="resolved"><button class="btn btn-success" type="submit">{{#str}}resolve, mod_requesthelp{{/str}}</button></form>{{/canresolve}}
+        {{#canreopen}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="reopen"><button class="btn btn-secondary" type="submit">{{#str}}reopen, mod_requesthelp{{/str}}</button></form>{{/canreopen}}
+    </div>
+
+    <h3>{{#str}}conversation, mod_requesthelp{{/str}}</h3>
+    {{#hasmessages}}
+    <div class="requesthelp-conversation">
+        {{#messages}}
+        <div class="requesthelp-message {{#isstaff}}staff{{/isstaff}}">
+            <div class="requesthelp-message-head"><strong>{{fullname}}</strong><span>{{time}}</span></div>
+            <div>{{{message}}}</div>
+        </div>
+        {{/messages}}
+    </div>
+    {{/hasmessages}}
+</div>
