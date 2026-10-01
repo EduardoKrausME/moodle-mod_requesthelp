@@ -18,23 +18,13 @@ síncronas ou laboratórios.
 - assuntos configuráveis, um por linha;
 - status Aberto, Respondido e Resolvido;
 - atualização automática da fila em 5, 10, 15 ou 30 segundos;
-- ação “Respondido em sala”, sem obrigar o professor a digitar uma resposta;
+- ação **Respondido em sala**, sem obrigar o professor a digitar uma resposta;
 - histórico de mensagens quando a resposta precisa ficar registrada no Moodle;
 - professor pode assumir um atendimento;
-- tempo até a primeira resposta;
+- registro do tempo até a primeira resposta;
 - filtros por status e assunto;
 - visão individual do aluno com suas próprias dúvidas;
 - eventos Moodle para criação, resposta e resolução;
-- Privacy API;
-- backup e restore Moodle 2;
-- interface responsiva e sem renderer customizado.
-
-## Compatibilidade
-
-- Moodle 4.5 ou superior.
-- PHP compatível com a versão do Moodle instalada.
-
-## Instalação
-
-Copie a pasta `requesthelp` para `mod/requesthelp` e execute a atualização do Moodle em Administração do site >
-Notificações.
+- integração com a Privacy API;
+- backup e restauração da atividade;
+- interface responsiva.
