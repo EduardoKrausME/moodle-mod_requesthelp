@@ -27,6 +27,7 @@ defined('MOODLE_INTERNAL') || die;
 $functions = [
     "mod_requesthelp_get_queue" => [
         "classname" => "mod_requesthelp\\external\\get_queue",
+        "methodname" => "execute",
         "description" => "Return the current help-request queue and status totals.",
         "type" => "read",
         "ajax" => true,
