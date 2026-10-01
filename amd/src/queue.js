@@ -21,15 +21,15 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-define(["jquery", "core/templates", "core/ajax"], function($, Templates, Ajax) {
+define(["jquery", "core/templates", "core/ajax"], function ($, Templates, Ajax) {
     return {
-        init: function(config) {
+        init: function (config) {
             var interval = parseInt(config.interval, 10) || 0;
             if (interval <= 0) {
                 return;
             }
 
-            var refresh = function() {
+            var refresh = function () {
                 var calls = Ajax.call([{
                     methodname: "mod_requesthelp_get_queue",
                     args: {
@@ -39,20 +39,22 @@ define(["jquery", "core/templates", "core/ajax"], function($, Templates, Ajax) {
                     }
                 }]);
 
-                calls[0].then(function(data) {
+                calls[0].then(function (data) {
                     var rows = data.rows || [];
                     Templates.render("mod_requesthelp/queue_rows", {
                         requests: rows,
                         hasrequests: rows.length > 0
-                    }).then(function(html) {
+                    }).then(function (html) {
                         $(`[data-region='queue']`).html(html);
-                    }).catch(function() {});
+                    }).catch(function () {
+                    });
                     if (data.stats) {
                         $(`[data-stat='open']`).text(data.stats.open);
                         $(`[data-stat='answered']`).text(data.stats.answered);
                         $(`[data-stat='resolved']`).text(data.stats.resolved);
                     }
-                }).catch(function() {});
+                }).catch(function () {
+                });
             };
 
             window.setInterval(refresh, interval * 1000);

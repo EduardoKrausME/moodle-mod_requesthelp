@@ -24,7 +24,12 @@
 
 namespace mod_requesthelp;
 
+use coding_exception;
 use context_module;
+use mod_requesthelp\event\request_answered;
+use mod_requesthelp\event\request_created;
+use mod_requesthelp\event\request_resolved;
+use moodle_exception;
 use moodle_url;
 use stdClass;
 
@@ -95,10 +100,10 @@ class manager {
         $subject = trim($subject);
         $description = trim($description);
         if ($subject === "" || !in_array($subject, $this->get_subjects(), true)) {
-            throw new \moodle_exception("invalidsubject", "mod_requesthelp");
+            throw new moodle_exception("invalidsubject", "mod_requesthelp");
         }
         if ($description === "") {
-            throw new \moodle_exception("descriptionrequired", "mod_requesthelp");
+            throw new moodle_exception("descriptionrequired", "mod_requesthelp");
         }
 
         $now = time();
@@ -116,7 +121,7 @@ class manager {
         ];
         $id = $DB->insert_record("requesthelp_requests", $record);
 
-        $event = \mod_requesthelp\event\request_created::create([
+        $event = request_created::create([
             "objectid" => $id,
             "context" => $this->context,
             "userid" => $userid,
@@ -235,7 +240,7 @@ class manager {
         $request->timemodified = $now;
         $DB->update_record("requesthelp_requests", $request);
 
-        $event = \mod_requesthelp\event\request_answered::create([
+        $event = request_answered::create([
             "objectid" => $request->id,
             "context" => $this->context,
             "userid" => $userid,
@@ -256,7 +261,7 @@ class manager {
     public function set_status(int $requestid, int $newstatus, int $userid): void {
         global $DB;
         if (!in_array($newstatus, [status::OPEN, status::ANSWERED, status::RESOLVED], true)) {
-            throw new \coding_exception("Invalid request help status");
+            throw new coding_exception("Invalid request help status");
         }
         $request = $this->get_request($requestid);
         $now = time();
@@ -278,7 +283,7 @@ class manager {
         $DB->update_record("requesthelp_requests", $request);
 
         if ($newstatus === status::RESOLVED) {
-            $event = \mod_requesthelp\event\request_resolved::create([
+            $event = request_resolved::create([
                 "objectid" => $request->id,
                 "context" => $this->context,
                 "userid" => $userid,
@@ -303,7 +308,7 @@ class manager {
         $request = $this->get_request($requestid);
         $message = trim($message);
         if ($message === "") {
-            throw new \moodle_exception("messagerequired", "mod_requesthelp");
+            throw new moodle_exception("messagerequired", "mod_requesthelp");
         }
 
         $now = time();
@@ -325,7 +330,7 @@ class manager {
             if ($request->status !== status::RESOLVED) {
                 $request->status = status::ANSWERED;
             }
-            $event = \mod_requesthelp\event\request_answered::create([
+            $event = request_answered::create([
                 "objectid" => $request->id,
                 "context" => $this->context,
                 "userid" => $userid,

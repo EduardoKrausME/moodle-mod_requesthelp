@@ -25,19 +25,21 @@
 <div class="requesthelp-student-list mt-4">
     <h3>{{#str}}myrequests, mod_requesthelp{{/str}}</h3>
     {{#hasrequests}}
-    <div class="requesthelp-queue compact">
-        {{#requests}}
-        <a class="requesthelp-ticket {{statusclass}}" href="{{url}}">
-            <div class="requesthelp-ticket-main">
-                <div class="requesthelp-ticket-topline">
-                    <span class="requesthelp-status {{statusclass}}">{{status}}</span>
-                    <span class="requesthelp-subject">{{subject}}</span>
-                </div>
-                <div class="requesthelp-meta">{{created}} · {{#str}}waitingtime, mod_requesthelp{{/str}}: {{waiting}}</div>
-            </div>
-        </a>
-        {{/requests}}
-    </div>
+        <div class="requesthelp-queue compact">
+            {{#requests}}
+                <a class="requesthelp-ticket {{statusclass}}" href="{{url}}">
+                    <div class="requesthelp-ticket-main">
+                        <div class="requesthelp-ticket-topline">
+                            <span class="requesthelp-status {{statusclass}}">{{status}}</span>
+                            <span class="requesthelp-subject">{{subject}}</span>
+                        </div>
+                        <div class="requesthelp-meta">{{created}} · {{#str}}
+                            waitingtime, mod_requesthelp{{/str}}: {{waiting}}</div>
+                    </div>
+                </a>
+            {{/requests}}
+        </div>
     {{/hasrequests}}
-    {{^hasrequests}}<div class="alert alert-info">{{#str}}noyourrequests, mod_requesthelp{{/str}}</div>{{/hasrequests}}
+    {{^hasrequests}}
+        <div class="alert alert-info">{{#str}}noyourrequests, mod_requesthelp{{/str}}</div>{{/hasrequests}}
 </div>

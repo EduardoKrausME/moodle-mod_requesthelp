@@ -24,6 +24,7 @@
 
 namespace mod_requesthelp\privacy;
 
+use context;
 use core_privacy\local\metadata\collection;
 use core_privacy\local\request\approved_contextlist;
 use core_privacy\local\request\contextlist;
@@ -119,10 +120,10 @@ class provider implements
     /**
      * Method delete_data_for_all_users_in_context.
      *
-     * @param \context $context Parameter context.
+     * @param context $context Parameter context.
      * @return mixed Return value.
      */
-    public static function delete_data_for_all_users_in_context(\context $context) {
+    public static function delete_data_for_all_users_in_context(context $context) {
         global $DB;
         if ($context->contextlevel !== CONTEXT_MODULE) {
             return;
@@ -133,7 +134,7 @@ class provider implements
         }
         $requestids = $DB->get_fieldset_select("requesthelp_requests", "id", "requesthelpid = :id", ["id" => $cm->instance]);
         if ($requestids) {
-            list($insql, $params) = $DB->get_in_or_equal($requestids, SQL_PARAMS_NAMED);
+            [$insql, $params] = $DB->get_in_or_equal($requestids, SQL_PARAMS_NAMED);
             $DB->delete_records_select("requesthelp_messages", "requestid {$insql}", $params);
         }
         $DB->delete_records("requesthelp_requests", ["requesthelpid" => $cm->instance]);
@@ -159,7 +160,7 @@ class provider implements
             $activityrequestids = $DB->get_fieldset_select("requesthelp_requests", "id",
                 "requesthelpid = :instanceid", ["instanceid" => $cm->instance]);
             if ($activityrequestids) {
-                list($activitysql, $activityparams) = $DB->get_in_or_equal($activityrequestids, SQL_PARAMS_NAMED, "ar");
+                [$activitysql, $activityparams] = $DB->get_in_or_equal($activityrequestids, SQL_PARAMS_NAMED, "ar");
                 $activityparams["messageuserid"] = $userid;
                 $DB->delete_records_select("requesthelp_messages",
                     "requestid {$activitysql} AND userid = :messageuserid", $activityparams);
@@ -168,7 +169,7 @@ class provider implements
             $ownedrequestids = $DB->get_fieldset_select("requesthelp_requests", "id",
                 "requesthelpid = :instanceid AND userid = :userid", ["instanceid" => $cm->instance, "userid" => $userid]);
             if ($ownedrequestids) {
-                list($ownedsql, $ownedparams) = $DB->get_in_or_equal($ownedrequestids, SQL_PARAMS_NAMED, "or");
+                [$ownedsql, $ownedparams] = $DB->get_in_or_equal($ownedrequestids, SQL_PARAMS_NAMED, "or");
                 $DB->delete_records_select("requesthelp_messages", "requestid {$ownedsql}", $ownedparams);
                 $DB->delete_records_select("requesthelp_requests", "id {$ownedsql}", $ownedparams);
             }

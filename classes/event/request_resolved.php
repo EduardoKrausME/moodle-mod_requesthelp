@@ -24,10 +24,13 @@
 
 namespace mod_requesthelp\event;
 
+use core\event\base;
+use moodle_url;
+
 /**
  * Class request_resolved.
  */
-class request_resolved extends \core\event\base {
+class request_resolved extends base {
     /**
      * Method init.
      *
@@ -63,6 +66,6 @@ class request_resolved extends \core\event\base {
      * @return mixed Return value.
      */
     public function get_url() {
-        return new \moodle_url("/mod/requesthelp/request.php", ["id" => $this->objectid]);
+        return new moodle_url("/mod/requesthelp/request.php", ["id" => $this->objectid]);
     }
 }

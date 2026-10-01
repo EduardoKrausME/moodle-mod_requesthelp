@@ -1,6 +1,7 @@
 # mod_requesthelp - Preciso de ajuda
 
-Atividade Moodle para organizar dúvidas rápidas em uma fila centralizada, especialmente durante aulas presenciais, síncronas ou laboratórios.
+Atividade Moodle para organizar dúvidas rápidas em uma fila centralizada, especialmente durante aulas presenciais,
+síncronas ou laboratórios.
 
 ## Fluxo
 
@@ -35,4 +36,5 @@ Atividade Moodle para organizar dúvidas rápidas em uma fila centralizada, espe
 
 ## Instalação
 
-Copie a pasta `requesthelp` para `mod/requesthelp` e execute a atualização do Moodle em Administração do site > Notificações.
+Copie a pasta `requesthelp` para `mod/requesthelp` e execute a atualização do Moodle em Administração do site >
+Notificações.

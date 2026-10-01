@@ -36,26 +36,48 @@
         <div class="requesthelp-question">{{{description}}}</div>
         <div class="requesthelp-detail-facts">
             <div><strong>{{#str}}responsetime, mod_requesthelp{{/str}}</strong><span>{{responsetime}}</span></div>
-            {{#assigned}}<div><strong>{{#str}}assignedto, mod_requesthelp{{/str}}</strong><span>{{assigned}}</span></div>{{/assigned}}
+            {{#assigned}}
+                <div><strong>{{#str}}assignedto, mod_requesthelp{{/str}}</strong><span>{{assigned}}</span>
+                </div>{{/assigned}}
         </div>
     </div>
 
     <div class="requesthelp-actions mb-4">
-        {{#canclaim}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="claim"><button class="btn btn-outline-secondary" type="submit">{{#str}}claim, mod_requesthelp{{/str}}</button></form>{{/canclaim}}
-        {{#canmarkanswered}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="answered"><button class="btn btn-primary" type="submit">{{#str}}markanswered, mod_requesthelp{{/str}}</button></form>{{/canmarkanswered}}
-        {{#canresolve}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="resolved"><button class="btn btn-success" type="submit">{{#str}}resolve, mod_requesthelp{{/str}}</button></form>{{/canresolve}}
-        {{#canreopen}}<form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey" value="{{sesskey}}"><input type="hidden" name="action" value="reopen"><button class="btn btn-secondary" type="submit">{{#str}}reopen, mod_requesthelp{{/str}}</button></form>{{/canreopen}}
+        {{#canclaim}}
+            <form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey"
+                                                                                     value="{{sesskey}}"><input
+                    type="hidden" name="action" value="claim">
+                <button class="btn btn-outline-secondary" type="submit">{{#str}}claim, mod_requesthelp{{/str}}</button>
+            </form>{{/canclaim}}
+        {{#canmarkanswered}}
+            <form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey"
+                                                                                     value="{{sesskey}}"><input
+                    type="hidden" name="action" value="answered">
+                <button class="btn btn-primary" type="submit">{{#str}}markanswered, mod_requesthelp{{/str}}</button>
+            </form>{{/canmarkanswered}}
+        {{#canresolve}}
+            <form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey"
+                                                                                     value="{{sesskey}}"><input
+                    type="hidden" name="action" value="resolved">
+                <button class="btn btn-success" type="submit">{{#str}}resolve, mod_requesthelp{{/str}}</button>
+            </form>{{/canresolve}}
+        {{#canreopen}}
+            <form method="post"><input type="hidden" name="id" value="{{id}}"><input type="hidden" name="sesskey"
+                                                                                     value="{{sesskey}}"><input
+                    type="hidden" name="action" value="reopen">
+                <button class="btn btn-secondary" type="submit">{{#str}}reopen, mod_requesthelp{{/str}}</button>
+            </form>{{/canreopen}}
     </div>
 
     <h3>{{#str}}conversation, mod_requesthelp{{/str}}</h3>
     {{#hasmessages}}
-    <div class="requesthelp-conversation">
-        {{#messages}}
-        <div class="requesthelp-message {{#isstaff}}staff{{/isstaff}}">
-            <div class="requesthelp-message-head"><strong>{{fullname}}</strong><span>{{time}}</span></div>
-            <div>{{{message}}}</div>
+        <div class="requesthelp-conversation">
+            {{#messages}}
+                <div class="requesthelp-message {{#isstaff}}staff{{/isstaff}}">
+                    <div class="requesthelp-message-head"><strong>{{fullname}}</strong><span>{{time}}</span></div>
+                    <div>{{{message}}}</div>
+                </div>
+            {{/messages}}
         </div>
-        {{/messages}}
-    </div>
     {{/hasmessages}}
 </div>
