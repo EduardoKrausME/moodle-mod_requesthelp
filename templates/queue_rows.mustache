@@ -33,13 +33,13 @@
                         <span class="requesthelp-wait">{{#str}}
                             waitingtime, mod_requesthelp{{/str}}: <strong>{{waiting}}</strong></span>
                     </div>
-                    <h3><a href="{{url}}">{{student}}</a></h3>
+                    <h3><a href="{{{url}}}">{{student}}</a></h3>
                     <div class="requesthelp-description">{{{description}}}</div>
                     <div class="requesthelp-meta">{{created}}{{#assigned}}
                         · {{#str}}assignedto, mod_requesthelp{{/str}}: {{assigned}}{{/assigned}}</div>
                 </div>
                 <div class="requesthelp-ticket-actions">
-                    <a class="btn btn-outline-secondary btn-sm" href="{{url}}">{{#str}}
+                    <a class="btn btn-outline-secondary btn-sm" href="{{{url}}}">{{#str}}
                         viewrequest, mod_requesthelp{{/str}}</a>
                     {{#canmarkanswered}}
                         <form method="post" action="{{url}}"><input type="hidden" name="sesskey"
