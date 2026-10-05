@@ -68,4 +68,25 @@ class request_answered extends base {
     public function get_url() {
         return new moodle_url("/mod/requesthelp/request.php", ["id" => $this->objectid]);
     }
+
+    /**
+     * Return the restore mapping for the request id.
+     *
+     * @return array
+     */
+    public static function get_objectid_mapping() {
+        return ["db" => "requesthelp_requests", "restore" => "requesthelp_request"];
+    }
+
+    /**
+     * Return restore mappings for data stored in other.
+     *
+     * @return array
+     */
+    public static function get_other_mapping() {
+        return [
+            "requesthelpid" => ["db" => "requesthelp", "restore" => "requesthelp"],
+        ];
+    }
+
 }
