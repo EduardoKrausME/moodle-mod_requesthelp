@@ -139,7 +139,14 @@ class manager {
      */
     public function get_request(int $id): stdClass {
         global $DB;
-        return $DB->get_record("requesthelp_requests", ["id" => $id, "requesthelpid" => $this->instance->id], "*", MUST_EXIST);
+        $request = $DB->get_record(
+            "requesthelp_requests",
+            ["id" => $id, "requesthelpid" => $this->instance->id],
+            "*",
+            MUST_EXIST
+        );
+        $request->status = (int)$request->status;
+        return $request;
     }
 
     /**
