@@ -67,4 +67,13 @@ class restore_requesthelp_activity_task extends restore_activity_task {
             new restore_decode_rule("REQUESTHELPINDEX", "/mod/requesthelp/index.php?id=$1", "course"),
         ];
     }
+
+    /**
+     * Define the restore log rules for this activity.
+     *
+     * @return array Restore log rules.
+     */
+    public static function define_restore_log_rules(): array {
+        return [];
+    }
 }
