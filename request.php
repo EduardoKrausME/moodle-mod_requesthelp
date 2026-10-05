@@ -83,7 +83,6 @@ $messages = $manager->get_messages($request->id);
 $PAGE->set_url(new moodle_url("/mod/requesthelp/request.php", ["id" => $request->id]));
 $PAGE->set_title(format_string($request->subject));
 $PAGE->set_heading(format_string($course->fullname));
-$PAGE->requires->css("/mod/requesthelp/styles.css");
 
 $messagerows = [];
 foreach ($messages as $message) {
