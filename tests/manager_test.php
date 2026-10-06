@@ -24,9 +24,12 @@
 
 namespace mod_requesthelp;
 
+use PHPUnit\Framework\Attributes\CoversClass;
+
 /**
  * Tests for the request manager.
  */
+#[CoversClass(manager::class)]
 final class manager_test extends \advanced_testcase {
     /**
      * Database status values are normalised before business logic compares them.
